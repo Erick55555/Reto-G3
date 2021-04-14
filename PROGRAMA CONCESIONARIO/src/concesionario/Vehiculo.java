@@ -1,10 +1,13 @@
 package concesionario;
 
+import java.util.HashMap;
+
 public abstract class Vehiculo {
 	
 	private String matricula, color, numBastidor, numSerie;
 	private int numAsientos;
 	private float precio;
+	private static HashMap<String, Vehiculo> vehiculos = new HashMap<String, Vehiculo>();
 	
 	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String numSerie) {
 		this.matricula = matricula;
@@ -13,6 +16,10 @@ public abstract class Vehiculo {
 		this.numAsientos = numAsientos;
 		this.precio = precio;
 		this.numSerie = numSerie;
+	}
+	
+	public static void agregarVehiculo (Vehiculo vehiculo) {
+		vehiculos.put(vehiculo.matricula, vehiculo);
 	}
 	
 	@Override
@@ -43,6 +50,10 @@ public abstract class Vehiculo {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+	
+	public static HashMap<String, Vehiculo> getVehiculos () {
+		return vehiculos;
 	}
 	
 	

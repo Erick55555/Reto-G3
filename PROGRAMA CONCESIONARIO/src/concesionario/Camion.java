@@ -14,7 +14,7 @@ private char tipoMercancia;
 	@Override
 	public String toString () {
 		System.out.println(super.toString());
-		return "Carga: " + carga + "\nTipo de mercancía: " + tipoMercancia;
+		return "Carga: " + carga + "\nTipo de mercancía: " + tipoMercancia + "\n";
 	}
 
 	public void setCarga(float carga) {
