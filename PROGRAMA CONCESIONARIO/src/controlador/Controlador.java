@@ -10,7 +10,6 @@ public class Controlador {
 	
 	private Vista menu;
 	private Modelo gestion;
-	private static int VEHICULO_NUEVO, MODIFICAR_DATOS, VENDER_VEHICULO, COMPRAR_VEHICULO, COMPROBAR_STOCK, CONSULTAR_VENTAS, FICHEROS_XML, SALIR; 
 	
 	public Controlador (Vista menu, Modelo gestion) {
 		this.menu = menu;
@@ -62,7 +61,7 @@ public class Controlador {
 				
 			}
 			
-		} while (opcion != SALIR);
+		} while (opcion != 8);
 		
 		
 	}
