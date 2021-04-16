@@ -7,7 +7,6 @@ public abstract class Vehiculo {
 	private String matricula, color, numBastidor, marca, modelo, añoFab, numSerie;
 	private int numAsientos;
 	private float precio;
-	private static HashMap<String, Vehiculo> vehiculos = new HashMap<String, Vehiculo>();
 	
 	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab) {
 		this.matricula = matricula;
@@ -19,10 +18,6 @@ public abstract class Vehiculo {
 		this.modelo = modelo;
 		this.añoFab = añoFab;
 		this.numSerie = marca + modelo + añoFab;
-	}
-	
-	public static void agregarVehiculo (Vehiculo vehiculo) {
-		vehiculos.put(vehiculo.matricula, vehiculo);
 	}
 	
 	@Override
@@ -54,10 +49,6 @@ public abstract class Vehiculo {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
-	}
-	
-	public static HashMap<String, Vehiculo> getVehiculos () {
-		return vehiculos;
 	}
 
 	public String getMatricula() {

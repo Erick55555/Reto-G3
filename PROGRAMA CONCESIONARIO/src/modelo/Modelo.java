@@ -35,7 +35,25 @@ public class Modelo {
 		gestionBd.insertarCamionBd(conexion, camion);
 	}
 	
+	public void ConsultaStockFechas(String[] fechas) {
+		gestionBd.consultaFechas(conexion, fechas);
+	}
 	
+	public void matriculasExistentes (String tipo) {
+		gestionBd.consultarMatriculas(conexion, tipo);
+	}
+	
+	public void mostrarStock () {
+		gestionBd.mostrarStock(conexion);
+	}
+	
+	public void mostrarCoche () {
+		gestionBd.consultaCoches(conexion);
+	}
+	
+	public void mostrarCamiones () {
+		gestionBd.consultaCamiones(conexion);
+	}
 	
 	
 }

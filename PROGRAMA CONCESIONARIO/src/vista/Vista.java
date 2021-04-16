@@ -10,13 +10,13 @@ public class Vista {
 		System.out.println("MENÚ DE OPCIONES\n");
 		System.out.println("Elige una de estas opciones:");
 		
-		System.out.println("Crear un vehículo [1]");
+		System.out.println("Añadir un vehículo [1]");
 		System.out.println("Modificar datos de un vehículo [2]");
 		System.out.println("Vender un vehículo [3]");
-		System.out.println("Comprar un vehículo [4]");
-		System.out.println("Comprobar stock [5]");
+		System.out.println("Comprobar stock [4]");
 		System.out.println("Consultar ventas en un periodo de tiempo [5]");
-		System.out.println("Ficheros XML [7]");
+		System.out.println("Exportar fichero XML [6]");
+		System.out.println("Importar fichero XML [7]");
 		System.out.println("Salir [8]");
 	}
 	
@@ -107,6 +107,18 @@ public class Vista {
 	
 	public void mostrarInfoVehiculo (Vehiculo vehiculo) {
 		System.out.println(vehiculo.toString());
+	}
+	
+	public String[] solicitarFechas () {
+		String[] fechas = new String[2];
+		
+		System.out.println("Introduce la fecha más antigua");
+		fechas[0] = Console.readString();
+		
+		System.out.println("Introduce la fecha más reciente");
+		fechas[1] = Console.readString();
+
+		return fechas;
 	}
 	
 }
