@@ -4,18 +4,21 @@ import java.util.HashMap;
 
 public abstract class Vehiculo {
 	
-	private String matricula, color, numBastidor, numSerie;
+	private String matricula, color, numBastidor, marca, modelo, añoFab, numSerie;
 	private int numAsientos;
 	private float precio;
 	private static HashMap<String, Vehiculo> vehiculos = new HashMap<String, Vehiculo>();
 	
-	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String numSerie) {
+	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab) {
 		this.matricula = matricula;
 		this.numBastidor = numBastidor;
 		this.color = color;
 		this.numAsientos = numAsientos;
 		this.precio = precio;
-		this.numSerie = numSerie;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.añoFab = añoFab;
+		this.numSerie = marca + modelo + añoFab;
 	}
 	
 	public static void agregarVehiculo (Vehiculo vehiculo) {
@@ -27,7 +30,8 @@ public abstract class Vehiculo {
 		return "Matrícula: " + matricula + "\nNº de bastidor: " + numBastidor + "\nColor: " + color + "\nNº de asientos: "
 		+ numAsientos + "\nPrecio: " + precio + "\nNº de serie: " + numSerie;
 	}
-
+	
+	// GETTERS Y SETTERS
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
@@ -54,6 +58,54 @@ public abstract class Vehiculo {
 	
 	public static HashMap<String, Vehiculo> getVehiculos () {
 		return vehiculos;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public String getNumBastidor() {
+		return numBastidor;
+	}
+
+	public String getNumSerie() {
+		return numSerie;
+	}
+
+	public int getNumAsientos() {
+		return numAsientos;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public String getAñoFab() {
+		return añoFab;
+	}
+
+	public void setAñoFab(String añoFab) {
+		this.añoFab = añoFab;
 	}
 	
 	

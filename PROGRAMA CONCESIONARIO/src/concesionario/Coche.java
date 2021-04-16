@@ -4,8 +4,8 @@ public class Coche extends Vehiculo {
 	
 	private int numPuertas, capacidadMaletero;
 	
-	public Coche (String matricula, String numBastidor, String color, int numAsientos, float precio, String numSerie, int numPuertas, int capacidadMaletero) {
-		super(matricula, numBastidor, color, numAsientos, precio, numSerie);
+	public Coche (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab, int numPuertas, int capacidadMaletero) {
+		super(matricula, numBastidor, color, numAsientos, precio, marca, modelo, añoFab);
 		this.numPuertas = numPuertas;
 		this.capacidadMaletero = capacidadMaletero;
 	}
@@ -15,7 +15,8 @@ public class Coche extends Vehiculo {
 		System.out.println(super.toString());
 		return "Nº de puertas: " + numPuertas + "\nCapacidad del maletero: " + capacidadMaletero + "\n";
 	}
-
+	
+	// GETTERS Y SETTERS
 	public void setNumPuertas(int numPuertas) {
 		this.numPuertas = numPuertas;
 	}
@@ -23,6 +24,15 @@ public class Coche extends Vehiculo {
 	public void setCapacidadMaletero(int capacidadMaletero) {
 		this.capacidadMaletero = capacidadMaletero;
 	}
+
+	public int getNumPuertas() {
+		return numPuertas;
+	}
+
+	public int getCapacidadMaletero() {
+		return capacidadMaletero;
+	}
+	
 	
 	
 	

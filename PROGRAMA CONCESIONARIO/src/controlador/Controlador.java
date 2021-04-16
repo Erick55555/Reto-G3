@@ -32,11 +32,13 @@ public class Controlador {
 					if (tipo.equals("COCHE")) {
 						Coche coche = menu.pedirDatosCoche();
 						Vehiculo.agregarVehiculo(coche);
+						gestion.insertarCoche(coche); // PRUEBAS
 						System.out.println("Coche creado satisfactoriamente!, esta es su info:");
 						menu.mostrarInfoVehiculo(coche);
 					}
 					else {
 						Camion camion = menu.pedirDatosCamion();
+						gestion.insertarCamion(camion); // PRUEBAS
 						Vehiculo.agregarVehiculo(camion);
 						System.out.println("Camión creado satisfactoriamente!, esta es su info:");
 						menu.mostrarInfoVehiculo(camion);
@@ -171,7 +173,18 @@ public class Controlador {
 					break;
 				
 				case 3:
+					tipo = menu.tipoVehiculo();
+					System.out.println("Introduce el número de la matrícula del vehiculo");
+					String matricula = Console.readString();
 					
+					if (Vehiculo.getVehiculos().containsKey(matricula)) {
+						if (tipo.equals("COCHE")) {
+							gestion.insertarCoche(Vehiculo.getVehiculos().get(matricula));
+						}
+						else {
+							gestion.insertarCoche(coche);
+						}
+					}
 					
 			}
 			

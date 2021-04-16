@@ -66,14 +66,18 @@ public class Vista {
 		int numAsientos = Console.readInt();
 		System.out.println("Introduce el precio");
 		float precio = Console.readFloat();
-		System.out.println("Introduce el número de serie");
-		String numSerie = Console.readString();
+		System.out.println("Introduce la marca");
+		String marca = Console.readString();
+		System.out.println("Introduce el modelo");
+		String modelo = Console.readString();
+		System.out.println("Introduce el año de fabricación");
+		String añoFab = Console.readString();
 		System.out.println("Introduce el número de puertas");
 		int numPuertas = Console.readInt();
 		System.out.println("Introduce la capacidad del maletero");
 		int capacidadMaletero = Console.readInt();
 		
-		return new Coche (matricula, numBastidor, color, numAsientos, precio, numSerie, numPuertas, capacidadMaletero);
+		return new Coche (matricula, numBastidor, color, numAsientos, precio, marca, modelo, añoFab, numPuertas, capacidadMaletero);
 	}
 	
 	public Camion pedirDatosCamion () {
@@ -87,14 +91,18 @@ public class Vista {
 		int numAsientos = Console.readInt();
 		System.out.println("Introduce el precio");
 		float precio = Console.readFloat();
-		System.out.println("Introduce el número de serie");
-		String numSerie = Console.readString();
+		System.out.println("Introduce la marca");
+		String marca = Console.readString();
+		System.out.println("Introduce el modelo");
+		String modelo = Console.readString();
+		System.out.println("Introduce el año de fabricación");
+		String añoFab = Console.readString();
 		System.out.println("Introduce el peso de la carga");
 		float carga = Console.readFloat();
 		System.out.println("Introduce el tipo de mercancía [G/A/P]");
 		char tipoMercancia = Console.readChar();
 		
-		return new Camion (matricula, numBastidor, color, numAsientos, precio, numSerie, carga, tipoMercancia);
+		return new Camion (matricula, numBastidor, color, numAsientos, precio, marca, modelo, añoFab, carga, tipoMercancia);
 	}
 	
 	public void mostrarInfoVehiculo (Vehiculo vehiculo) {

@@ -5,8 +5,8 @@ public class Camion extends Vehiculo {
 private float carga;
 private char tipoMercancia;
 	
-	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String numSerie, float carga, char tipoMercancia) {
-		super(matricula, numBastidor, color, numAsientos, precio, numSerie);
+	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab, float carga, char tipoMercancia) {
+		super(matricula, numBastidor, color, numAsientos, precio, marca, modelo, añoFab);
 		this.carga = carga;
 		this.tipoMercancia = tipoMercancia;
 	}
@@ -16,7 +16,8 @@ private char tipoMercancia;
 		System.out.println(super.toString());
 		return "Carga: " + carga + "\nTipo de mercancía: " + tipoMercancia + "\n";
 	}
-
+	
+	// GETTERS Y SETTERS
 	public void setCarga(float carga) {
 		this.carga = carga;
 	}
@@ -24,6 +25,15 @@ private char tipoMercancia;
 	public void setTipoMercancia(char tipoMercancia) {
 		this.tipoMercancia = tipoMercancia;
 	}
+
+	public float getCarga() {
+		return carga;
+	}
+
+	public char getTipoMercancia() {
+		return tipoMercancia;
+	}
+	
 	
 	
 	
