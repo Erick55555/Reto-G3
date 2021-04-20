@@ -3,6 +3,9 @@ package modelo;
 import java.sql.*;
 import java.util.ArrayList;
 
+import concesionario.Camion;
+import concesionario.Coche;
+
 public class Modelo {
 
 	private static GestionBD gestionBd = new GestionBD();

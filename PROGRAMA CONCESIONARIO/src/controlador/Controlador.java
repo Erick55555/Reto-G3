@@ -1,7 +1,7 @@
 package controlador;
 
-import modelo.Camion;
-import modelo.Coche;
+import concesionario.Camion;
+import concesionario.Coche;
 import modelo.Modelo;
 import vista.Console;
 import vista.Vista;
