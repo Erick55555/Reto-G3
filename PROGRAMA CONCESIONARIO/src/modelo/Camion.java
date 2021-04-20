@@ -1,4 +1,4 @@
-package concesionario;
+package modelo;
 
 public class Camion extends Vehiculo {
 	

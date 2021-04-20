@@ -1,6 +1,4 @@
-package concesionario;
-
-import java.util.HashMap;
+package modelo;
 
 public abstract class Vehiculo {
 	

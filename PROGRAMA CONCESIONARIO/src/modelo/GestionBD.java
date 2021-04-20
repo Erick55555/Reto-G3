@@ -10,10 +10,6 @@ import org.nocrala.tools.texttablefmt.BorderStyle;
 import org.nocrala.tools.texttablefmt.CellStyle;
 import org.nocrala.tools.texttablefmt.Table;
 
-import concesionario.Camion;
-import concesionario.Coche;
-import concesionario.Vehiculo;
-
 public class GestionBD {
 
 	public void insertarVehiculoBd(Connection conexion, Vehiculo vehiculo) {

@@ -1,8 +1,8 @@
 package vista;
 
-import concesionario.Camion;
-import concesionario.Coche;
-import concesionario.Vehiculo;
+import modelo.Camion;
+import modelo.Coche;
+import modelo.Vehiculo;
 
 public class Vista {
 	
