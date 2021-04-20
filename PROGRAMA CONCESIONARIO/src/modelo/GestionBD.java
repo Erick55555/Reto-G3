@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.CellStyle;
+import org.nocrala.tools.texttablefmt.Table;
+
 import concesionario.Camion;
 import concesionario.Coche;
 import concesionario.Vehiculo;
@@ -63,68 +67,116 @@ public class GestionBD {
 		try {
 
 			Statement st = conexion.createStatement();
-			ResultSet rs = st.executeQuery(
-			"select * from historial where Fecha > '" + fechas[0] + "' and Fecha < '" + fechas[1] + "' and accion = 'VENDIDO'");
-			
-			System.out.println("|"
-					+ "----------------------------------------------------------------------------------------------------------------|");
-			System.out.println("|" + "Matricula \t | \t" + "Color \t | \t" + "Serie\t | \t"
-					+ "Fecha\t \t | \t" + "Acción\t |\t" + "Operación" + " \t |");
-			System.out.println("|"
-					+ "----------------------------------------------------------------------------------------------------------------|");
-			
+			ResultSet rs = st.executeQuery("select * from historial where Fecha > '" + fechas[0] + "' and Fecha < '"
+					+ fechas[1] + "' and accion = 'VENDIDO'");
+
+			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
+			CellStyle estilo = new CellStyle(CellStyle.HorizontalAlign.center);
+			t.addCell("Matricula", estilo);
+			t.addCell("Color", estilo);
+			t.addCell("Serie", estilo);
+			t.addCell("Fecha", estilo);
+			t.addCell("Acción", estilo);
+			t.addCell("Operación", estilo);
 			while (rs.next()) {
-
-				System.out.println("|" + rs.getString(1) + "\t  \t | \t" + rs.getString(2) + "\t | \t" + rs.getString(3) + "\t | \t" + rs.getString(4) + "\t| \t" + rs.getString(5) + "\t | \t" + rs.getString(6) + "\t | \t");
-
+				t.addCell(rs.getString(1), estilo);
+				t.addCell(rs.getString(2), estilo);
+				t.addCell(rs.getString(3), estilo);
+				t.addCell(rs.getString(4), estilo);
+				t.addCell(rs.getString(5), estilo);
+				t.addCell(rs.getString(6), estilo);
 			}
-			
-			
-			
+			System.out.println(t.render());
+
 		} catch (SQLException e) {
 			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
 		}
 	}
 
-	public void consultarMatriculas(Connection conexion, String tipo) {
-		ArrayList<String> matriculas = new ArrayList<String>();
-		if (tipo.equals("COCHES")) {
-			try {
-
-				Statement st = conexion.createStatement();
-				ResultSet rs = st.executeQuery(
-						"select v.* from vehiculos v, coches where v.Matricula = c.Matricula where v.Matricula = c.Matricula;");
-				while (rs.next()) {
-					matriculas.add(rs.getString(1));
+	public boolean comprobar(Connection conexion, String matricula) {
+		boolean existe = false;
+		try {
+			Statement st = conexion.createStatement();
+			ResultSet rs = st.executeQuery("select ve.* from vehiculos ve");
+			while (rs.next()) {
+				if (matricula.equals(rs.getString(1))) {
+					existe = true;
 				}
-			} catch (SQLException e) {
-				System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
 			}
-		} else {
-
+		} catch (SQLException e) {
+			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
 		}
+		return existe;
+	}
+
+	public void modificarBd(Connection conexion, String campo, String nuevoValor, String matricula) {
+
+		String[] camposVehiculo = { "Matricula", "Num_Bastidor", "Color", "Num_asientos", "Precio", "Num_Serie" };
+		String[] camposCoche = { "Num_puertas", "Capacidad_maletero" };
+		String[] camposCamion = { "Carga", "Tipo_mercancia" };
+
+		for (int i = 0; i < camposVehiculo.length; i++) {
+			if (camposVehiculo[i].equals(campo)) {
+				try {
+					Statement st = conexion.createStatement();
+					st.executeUpdate("update vehiculos set " + campo + " = '" + nuevoValor + "' where matricula = '"
+							+ matricula + "'");
+				} catch (SQLException e) {
+					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+				}
+
+			}
+		}
+
+		for (int i = 0; i < camposCoche.length; i++) {
+			if (camposCoche[i].equals(campo)) {
+				try {
+					Statement st = conexion.createStatement();
+					ResultSet rs = st.executeQuery("update coches set " + campo + " = '" + nuevoValor
+							+ "' where matricula = '" + matricula + "'");
+				} catch (SQLException e) {
+					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+				}
+
+			}
+		}
+
+		for (int i = 0; i < camposCamion.length; i++) {
+			if (camposCamion[i].equals(campo)) {
+				try {
+					Statement st = conexion.createStatement();
+					ResultSet rs = st.executeQuery("update camiones set " + campo + " = '" + nuevoValor
+							+ "' where matricula = '" + matricula + "'");
+				} catch (SQLException e) {
+					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+				}
+
+			}
+		}
+
 	}
 
 	public void mostrarStock(Connection conexion) {
 		try {
-
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery("select ve.* from vehiculos ve");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
-			System.out.println("|" + "Matricula \t | \t" + "Num_Bastidor \t | \t" + "Color\t | \t"
-					+ "Num_Asientos\t | \t" + "Precio\t |\t" + "Num_serie" + "\t \t|");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
+			CellStyle estilo = new CellStyle(CellStyle.HorizontalAlign.center);
+			t.addCell("Matricula", estilo);
+			t.addCell("Num_Bastridor", estilo);
+			t.addCell("Color", estilo);
+			t.addCell("Num_Asientos", estilo);
+			t.addCell("Precio", estilo);
+			t.addCell("Num_serie", estilo);
 			while (rs.next()) {
-
-				System.out.println("|" + rs.getString(1) + "\t  \t | \t" + rs.getString(2) + "\t  \t | \t"
-						+ rs.getString(3) + "\t | \t" + rs.getInt(4) + "\t  \t | \t" + rs.getInt(5) + "\t | \t"
-						+ rs.getString(6) + "\t|");
-
+				t.addCell(rs.getString(1), estilo);
+				t.addCell(rs.getString(2), estilo);
+				t.addCell(rs.getString(3), estilo);
+				t.addCell(rs.getString(4), estilo);
+				t.addCell(rs.getString(5), estilo);
+				t.addCell(rs.getString(6), estilo);
 			}
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+			System.out.println(t.render());
 
 		} catch (SQLException e) {
 			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
@@ -138,21 +190,24 @@ public class GestionBD {
 			Statement st = conexion.createStatement();
 			ResultSet rs = st
 					.executeQuery("select ve.* from vehiculos ve, coches co where ve.matricula = co.matricula");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
-			System.out.println("|" + "Matricula \t | \t" + "Num_Bastidor \t | \t" + "Color\t | \t"
-					+ "Num_Asientos\t | \t" + "Precio\t |\t" + "Num_serie" + "\t \t|");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+
+			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
+			CellStyle estilo = new CellStyle(CellStyle.HorizontalAlign.center);
+			t.addCell("Matricula", estilo);
+			t.addCell("Num_Bastidor", estilo);
+			t.addCell("Color", estilo);
+			t.addCell("Num_Asientos", estilo);
+			t.addCell("Precio", estilo);
+			t.addCell("Num_serie", estilo);
 			while (rs.next()) {
-
-				System.out.println("|" + rs.getString(1) + "\t  \t | \t" + rs.getString(2) + "\t  \t | \t"
-						+ rs.getString(3) + "\t | \t" + rs.getInt(4) + "\t  \t | \t" + rs.getInt(5) + "\t | \t"
-						+ rs.getString(6) + "\t|");
-
+				t.addCell(rs.getString(1), estilo);
+				t.addCell(rs.getString(2), estilo);
+				t.addCell(rs.getString(3), estilo);
+				t.addCell(rs.getString(4), estilo);
+				t.addCell(rs.getString(5), estilo);
+				t.addCell(rs.getString(6), estilo);
 			}
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+			System.out.println(t.render());
 
 		} catch (SQLException e) {
 			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
@@ -165,25 +220,69 @@ public class GestionBD {
 			Statement st = conexion.createStatement();
 			ResultSet rs = st
 					.executeQuery("select ve.* from vehiculos ve, camiones co where ve.matricula = co.matricula");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
-			System.out.println("|" + "Matricula \t | \t" + "Num_Bastidor \t | \t" + "Color\t | \t"
-					+ "Num_Asientos\t | \t" + "Precio\t |\t" + "Num_serie" + "\t \t|");
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
+			CellStyle estilo = new CellStyle(CellStyle.HorizontalAlign.center);
+			t.addCell("Matricula", estilo);
+			t.addCell("Num_Bastidor", estilo);
+			t.addCell("Color", estilo);
+			t.addCell("Num_Asientos", estilo);
+			t.addCell("Precio", estilo);
+			t.addCell("Num_serie", estilo);
 			while (rs.next()) {
-
-				System.out.println("|" + rs.getString(1) + "\t  \t | \t" + rs.getString(2) + "\t  \t | \t"
-						+ rs.getString(3) + "\t | \t" + rs.getInt(4) + "\t  \t | \t" + rs.getInt(5) + "\t | \t"
-						+ rs.getString(6) + "\t|");
-
+				t.addCell(rs.getString(1), estilo);
+				t.addCell(rs.getString(2), estilo);
+				t.addCell(rs.getString(3), estilo);
+				t.addCell(rs.getString(4), estilo);
+				t.addCell(rs.getString(5), estilo);
+				t.addCell(rs.getString(6), estilo);
 			}
-			System.out.println("|"
-					+ "-------------------------------------------------------------------------------------------------------------------------------|");
+			System.out.println(t.render());
 
 		} catch (SQLException e) {
 			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
 		}
+	}
+
+	public void eliminarCoche(Connection conexion, String matricula) {
+		try {
+			Statement st = conexion.createStatement();
+			st.executeUpdate("DELETE FROM vehiculos WHERE matricula='" + matricula + "'");
+			st.executeUpdate("DELETE FROM coches WHERE matricula='" + matricula + "'");
+			System.out.println("Vendido correctamente");
+		} catch (SQLException e) {
+			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+		}
+
+	}
+
+	public ResultSet obtenerCoches(Connection conexion) {
+		ResultSet rs = null;
+		try {
+			Statement st;
+			st = conexion.createStatement();
+			rs = st.executeQuery(
+					"select v.*,c.num_puertas,c.capacidad_maletero from Vehiculos v,Coches c where v.matricula=c.matricula");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+
+	public ResultSet obtenerCamiones(Connection conexion) {
+		ResultSet rs = null;
+		try {
+			Statement st;
+			st = conexion.createStatement();
+			rs = st.executeQuery(
+					"select v.*,c.carga,c.tipo_mercancia from Vehiculos v,Camiones c where v.matricula=c.matricula");
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 }

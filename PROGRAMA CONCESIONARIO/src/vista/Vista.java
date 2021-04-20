@@ -121,4 +121,34 @@ public class Vista {
 		return fechas;
 	}
 	
+	public String pedirMatricula (String tipo) {
+		System.out.println("Introduce la matricula del " + tipo.toLowerCase());
+		String matricula = Console.readString();
+		return matricula;
+	}
+	
+	public String pedirRuta () {
+		System.out.println("Introduce la ruta dónde quieres que se guarde el archivo XML [c:/users/nombre_usuario/ruta]");
+		String ruta = Console.readString();
+		return ruta;
+	}
+	
+	public String pedirCampoCoche () {
+		System.out.println("Introduce el nombre del campo que quieres modificar [Matricula, Num_Bastidor, Color, Num_asientos, Precio, Num_Serie, Num_puertas, Capacidad_Maletero]");
+		String campo = Console.readString();
+		return campo;
+	}
+	
+	public String pedirCampoCamion () {
+		System.out.println("Introduce el nombre del campo que quieres modificar [Matricula, Num_Bastidor, Color, Num_asientos, Precio, Num_Serie, Carga, Tipo_mercancia]");
+		String campo = Console.readString();
+		return campo;
+	}
+	
+	public String pedirNuevoValor (String campo) {
+		System.out.println("Introduce el nuevo valor para el campo " + campo);
+		String nuevoValor = Console.readString();
+		return nuevoValor;
+	}
+	
 }
