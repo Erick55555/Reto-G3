@@ -70,7 +70,7 @@ public class Vista {
 		String marca = Console.readString();
 		System.out.println("Introduce el modelo");
 		String modelo = Console.readString();
-		System.out.println("Introduce el año de fabricación");
+		System.out.println("Introduce el año de fabricación [AÑO/MES/DÍA]");
 		String añoFab = Console.readString();
 		System.out.println("Introduce el número de puertas");
 		int numPuertas = Console.readInt();
@@ -95,7 +95,7 @@ public class Vista {
 		String marca = Console.readString();
 		System.out.println("Introduce el modelo");
 		String modelo = Console.readString();
-		System.out.println("Introduce el año de fabricación");
+		System.out.println("Introduce el año de fabricación [AÑO/MES/DÍA]");
 		String añoFab = Console.readString();
 		System.out.println("Introduce el peso de la carga");
 		float carga = Console.readFloat();
@@ -149,6 +149,18 @@ public class Vista {
 		System.out.println("Introduce el nuevo valor para el campo " + campo);
 		String nuevoValor = Console.readString();
 		return nuevoValor;
+	}
+	
+	public String cambiarColor (String tipo) {
+		System.out.println("Quieres pintar el " + tipo.toLowerCase() + "? [SI/NO]");
+  		String respuesta =Console.readString();
+  		return respuesta.toUpperCase();
+	}
+	
+	public String pedirColor () {
+		System.out.println("¿Que color quieres ponerle?");
+		String color = Console.readString();
+  		return color;
 	}
 	
 }

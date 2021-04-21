@@ -59,8 +59,8 @@ public class Modelo {
 		return gestionBd.comprobar(conexion, probar);
 	}
 
-	public void eliminarDatos(String misma) {
-		gestionBd.eliminarCoche(conexion, misma);
+	public void eliminarDatos(String matricula, String respuesta, String color) {
+		gestionBd.eliminarVehiculo(conexion, matricula, respuesta, color);
 	}
 
 	public static ResultSet consultarStockCoches() {

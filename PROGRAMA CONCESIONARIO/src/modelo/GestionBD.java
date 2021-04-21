@@ -17,56 +17,46 @@ import concesionario.Vehiculo;
 public class GestionBD {
 
 	public void insertarVehiculoBd(Connection conexion, Vehiculo vehiculo) {
-		try {
-			String codigo1 = "insert into categorias values ('" + vehiculo.getMarca() + "', '" + vehiculo.getModelo()
-					+ "', '" + vehiculo.getA駉Fab() + "')";
-			String codigo2 = "insert into num_series values ('" + vehiculo.getNumSerie() + "', '" + vehiculo.getMarca()
-					+ "', '" + vehiculo.getModelo() + "', '" + vehiculo.getA駉Fab() + "')";
-			String codigo3 = "insert into vehiculos values ('" + vehiculo.getMatricula() + "', '"
+		try (Statement st = conexion.createStatement()) {
+			st.executeUpdate("insert into categorias values ('" + vehiculo.getMarca() + "', '" + vehiculo.getModelo()
+			+ "', '" + vehiculo.getA帽oFab() + "')");
+			st.executeUpdate("insert into num_series values ('" + vehiculo.getNumSerie() + "', '" + vehiculo.getMarca()
+			+ "', '" + vehiculo.getModelo() + "', '" + vehiculo.getA帽oFab() + "')");
+			st.executeUpdate("insert into vehiculos values ('" + vehiculo.getMatricula() + "', '"
 					+ vehiculo.getNumBastidor() + "', '" + vehiculo.getColor() + "', " + vehiculo.getNumAsientos()
-					+ ", " + vehiculo.getPrecio() + ", '" + vehiculo.getNumSerie() + "')";
-			Statement st = conexion.createStatement();
-			st.executeUpdate(codigo1);
-			st.executeUpdate(codigo2);
-			st.executeUpdate(codigo3);
-			System.out.println("Se ha a馻dido un vehiculo correctamente!");
+					+ ", " + vehiculo.getPrecio() + ", '" + vehiculo.getNumSerie() + "')");
+			System.out.println("Se ha a帽adido un vehiculo correctamente!");
 		} catch (SQLException e) {
 			System.out.println(
-					"Ha saltado una excepci髇 de tipo SQLException " + e.getMessage() + " insertar en vehiculos");
+					"Ha saltado una excepci贸n de tipo SQLException " + e.getMessage() + " insertar en vehiculos");
 		}
 
 	}
 
 	public void insertarCocheBd(Connection conexion, Coche coche) {
-		try {
-			String codigo = "insert into coches values ('" + coche.getMatricula() + "', " + coche.getNumAsientos()
-					+ ", " + coche.getCapacidadMaletero() + ")";
-			Statement st = conexion.createStatement();
-			st.executeUpdate(codigo);
-			System.out.println("Se ha a馻dido un coche correctamente!");
+		try (Statement st = conexion.createStatement()) {
+			st.executeUpdate("insert into coches values ('" + coche.getMatricula() + "', " + coche.getNumAsientos()
+			+ ", " + coche.getCapacidadMaletero() + ")");
+			System.out.println("Se ha a帽adido un coche correctamente!");
 		} catch (SQLException e) {
 			System.out
-					.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage() + " insertar en coches");
+					.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage() + " insertar en coches");
 		}
 	}
 
 	public void insertarCamionBd(Connection conexion, Camion camion) {
-		try {
-			String codigo = "insert into camiones values ('" + camion.getMatricula() + "', " + camion.getCarga() + ", '"
-					+ camion.getTipoMercancia() + "')";
-			Statement st = conexion.createStatement();
-			st.executeUpdate(codigo);
-			System.out.println("Se ha a馻dido un cami髇 correctamente!");
+		try (Statement st = conexion.createStatement()) {
+			st.executeUpdate("insert into camiones values ('" + camion.getMatricula() + "', " + camion.getCarga() + ", '"
+					+ camion.getTipoMercancia() + "')");
+			System.out.println("Se ha a帽adido un cami贸n correctamente!");
 		} catch (SQLException e) {
 			System.out.println(
-					"Ha saltado una excepci髇 de tipo SQLException " + e.getMessage() + " insertar en camiones");
+					"Ha saltado una excepci贸n de tipo SQLException " + e.getMessage() + " insertar en camiones");
 		}
 	}
 
 	public void consultaFechas(Connection conexion, String[] fechas) {
-		try {
-
-			Statement st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			ResultSet rs = st.executeQuery("select * from historial where Fecha > '" + fechas[0] + "' and Fecha < '"
 					+ fechas[1] + "' and accion = 'VENDIDO'");
 
@@ -76,8 +66,8 @@ public class GestionBD {
 			t.addCell("Color", estilo);
 			t.addCell("Serie", estilo);
 			t.addCell("Fecha", estilo);
-			t.addCell("Acci髇", estilo);
-			t.addCell("Operaci髇", estilo);
+			t.addCell("Acci贸n", estilo);
+			t.addCell("Operaci贸n", estilo);
 			while (rs.next()) {
 				t.addCell(rs.getString(1), estilo);
 				t.addCell(rs.getString(2), estilo);
@@ -89,14 +79,13 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 		}
 	}
 
 	public boolean comprobar(Connection conexion, String matricula) {
 		boolean existe = false;
-		try {
-			Statement st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			ResultSet rs = st.executeQuery("select ve.* from vehiculos ve");
 			while (rs.next()) {
 				if (matricula.equals(rs.getString(1))) {
@@ -104,7 +93,7 @@ public class GestionBD {
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 		}
 		return existe;
 	}
@@ -117,12 +106,11 @@ public class GestionBD {
 
 		for (int i = 0; i < camposVehiculo.length; i++) {
 			if (camposVehiculo[i].equals(campo)) {
-				try {
-					Statement st = conexion.createStatement();
+				try (Statement st = conexion.createStatement()) {
 					st.executeUpdate("update vehiculos set " + campo + " = '" + nuevoValor + "' where matricula = '"
 							+ matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -130,12 +118,11 @@ public class GestionBD {
 
 		for (int i = 0; i < camposCoche.length; i++) {
 			if (camposCoche[i].equals(campo)) {
-				try {
-					Statement st = conexion.createStatement();
+				try (Statement st = conexion.createStatement()) {
 					ResultSet rs = st.executeQuery("update coches set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -143,12 +130,11 @@ public class GestionBD {
 
 		for (int i = 0; i < camposCamion.length; i++) {
 			if (camposCamion[i].equals(campo)) {
-				try {
-					Statement st = conexion.createStatement();
+				try (Statement st = conexion.createStatement()) {
 					ResultSet rs = st.executeQuery("update camiones set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -157,8 +143,7 @@ public class GestionBD {
 	}
 
 	public void mostrarStock(Connection conexion) {
-		try {
-			Statement st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			ResultSet rs = st.executeQuery("select ve.* from vehiculos ve");
 			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
 			CellStyle estilo = new CellStyle(CellStyle.HorizontalAlign.center);
@@ -179,15 +164,13 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 		}
 
 	}
 
 	public void consultaCoches(Connection conexion) {
-		try {
-
-			Statement st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			ResultSet rs = st
 					.executeQuery("select ve.* from vehiculos ve, coches co where ve.matricula = co.matricula");
 
@@ -210,14 +193,12 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 		}
 	}
 
 	public void consultaCamiones(Connection conexion) {
-		try {
-
-			Statement st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			ResultSet rs = st
 					.executeQuery("select ve.* from vehiculos ve, camiones co where ve.matricula = co.matricula");
 			Table t = new Table(6, BorderStyle.DESIGN_TUBES_WIDE);
@@ -239,27 +220,35 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepci贸n de tipo SQLException " + e.getMessage());
 		}
 	}
 
-	public void eliminarCoche(Connection conexion, String matricula) {
-		try {
-			Statement st = conexion.createStatement();
-			st.executeUpdate("DELETE FROM vehiculos WHERE matricula='" + matricula + "'");
-			st.executeUpdate("DELETE FROM coches WHERE matricula='" + matricula + "'");
-			System.out.println("Vendido correctamente");
-		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepci髇 de tipo SQLException " + e.getMessage());
-		}
+	public void eliminarVehiculo(Connection conexion, String matricula, String respuesta, String color) {
+	   	 try (Statement st = conexion.createStatement()) {
+	   		 if (respuesta.equals("SI")) {
+	   			 st.executeUpdate("Update vehiculos set color= '"+color+"'  WHERE matricula='" + matricula + "'");
+	   			 st.executeUpdate("DELETE FROM vehiculos WHERE matricula='" + matricula + "'");
+	   			 st.executeUpdate("DELETE FROM coches WHERE matricula='" + matricula + "'");
+	   			 System.out.println("Vendido y pintado correctamente");
+	   		 }else {
+	   			 st.executeUpdate("DELETE FROM vehiculos WHERE matricula='" + matricula + "'");
+	   			 st.executeUpdate("DELETE FROM coches WHERE matricula='" + matricula + "'");
+	   			 System.out.println("Vendido correctamente sin repintar");
+	   		 }
+	   		 
+	   		 
+	   		 
+	   	 } catch (SQLException e) {
+	   		 System.out.println("Ha saltado una excepci锟絥 de tipo SQLException " + e.getMessage());
+	   	 }
 
-	}
+	    }
+
 
 	public ResultSet obtenerCoches(Connection conexion) {
 		ResultSet rs = null;
-		try {
-			Statement st;
-			st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			rs = st.executeQuery(
 					"select v.*,c.num_puertas,c.capacidad_maletero from Vehiculos v,Coches c where v.matricula=c.matricula");
 
@@ -272,9 +261,7 @@ public class GestionBD {
 
 	public ResultSet obtenerCamiones(Connection conexion) {
 		ResultSet rs = null;
-		try {
-			Statement st;
-			st = conexion.createStatement();
+		try (Statement st = conexion.createStatement()) {
 			rs = st.executeQuery(
 					"select v.*,c.carga,c.tipo_mercancia from Vehiculos v,Camiones c where v.matricula=c.matricula");
 
