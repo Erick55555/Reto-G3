@@ -19,16 +19,16 @@ public class GestionBD {
 	public void insertarVehiculoBd(Connection conexion, Vehiculo vehiculo) {
 		try (Statement st = conexion.createStatement()) {
 			st.executeUpdate("insert into categorias values ('" + vehiculo.getMarca() + "', '" + vehiculo.getModelo()
-			+ "', '" + vehiculo.getAñoFab() + "')");
+			+ "', '" + vehiculo.getFechaFab() + "')");
 			st.executeUpdate("insert into num_series values ('" + vehiculo.getNumSerie() + "', '" + vehiculo.getMarca()
-			+ "', '" + vehiculo.getModelo() + "', '" + vehiculo.getAñoFab() + "')");
+			+ "', '" + vehiculo.getModelo() + "', '" + vehiculo.getFechaFab() + "')");
 			st.executeUpdate("insert into vehiculos values ('" + vehiculo.getMatricula() + "', '"
 					+ vehiculo.getNumBastidor() + "', '" + vehiculo.getColor() + "', " + vehiculo.getNumAsientos()
 					+ ", " + vehiculo.getPrecio() + ", '" + vehiculo.getNumSerie() + "')");
 			System.out.println("Se ha añadido un vehiculo correctamente!");
 		} catch (SQLException e) {
 			System.out.println(
-					"Ha saltado una excepción de tipo SQLException " + e.getMessage() + " insertar en vehiculos");
+					"Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en vehiculos");
 		}
 
 	}
@@ -40,7 +40,7 @@ public class GestionBD {
 			System.out.println("Se ha añadido un coche correctamente!");
 		} catch (SQLException e) {
 			System.out
-					.println("Ha saltado una excepción de tipo SQLException " + e.getMessage() + " insertar en coches");
+					.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en coches");
 		}
 	}
 
@@ -51,7 +51,7 @@ public class GestionBD {
 			System.out.println("Se ha añadido un camión correctamente!");
 		} catch (SQLException e) {
 			System.out.println(
-					"Ha saltado una excepción de tipo SQLException " + e.getMessage() + " insertar en camiones");
+					"Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en camiones");
 		}
 	}
 
@@ -79,7 +79,7 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 	}
 
@@ -93,7 +93,7 @@ public class GestionBD {
 				}
 			}
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 		return existe;
 	}
@@ -110,7 +110,7 @@ public class GestionBD {
 					st.executeUpdate("update vehiculos set " + campo + " = '" + nuevoValor + "' where matricula = '"
 							+ matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -122,7 +122,7 @@ public class GestionBD {
 					ResultSet rs = st.executeQuery("update coches set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -134,7 +134,7 @@ public class GestionBD {
 					ResultSet rs = st.executeQuery("update camiones set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
-					System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+					System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 				}
 
 			}
@@ -164,7 +164,7 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 
 	}
@@ -193,7 +193,7 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 	}
 
@@ -220,7 +220,7 @@ public class GestionBD {
 			System.out.println(t.render());
 
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 	}
 
@@ -240,7 +240,7 @@ public class GestionBD {
 	   		 
 	   		 
 	   	 } catch (SQLException e) {
-	   		 System.out.println("Ha saltado una excepci�n de tipo SQLException " + e.getMessage());
+	   		 System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 	   	 }
 
 	    }

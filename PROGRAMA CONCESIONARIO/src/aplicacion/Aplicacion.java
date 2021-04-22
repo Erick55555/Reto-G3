@@ -14,7 +14,7 @@ public class Aplicacion {
 			controlador.run();
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("Ha saltado una excepción de tipo ClassNotFoundException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo ClassNotFoundException " + e.getMessage());
 		}
 	
 		

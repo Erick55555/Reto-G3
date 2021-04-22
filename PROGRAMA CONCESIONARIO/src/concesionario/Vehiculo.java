@@ -2,11 +2,11 @@ package concesionario;
 
 public abstract class Vehiculo {
 	
-	private String matricula, color, numBastidor, marca, modelo, añoFab, numSerie;
+	private String matricula, color, numBastidor, marca, modelo, fechaFab, numSerie;
 	private int numAsientos;
 	private float precio;
 	
-	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab) {
+	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String fechaFab) {
 		this.matricula = matricula;
 		this.numBastidor = numBastidor;
 		this.color = color;
@@ -14,14 +14,14 @@ public abstract class Vehiculo {
 		this.precio = precio;
 		this.marca = marca;
 		this.modelo = modelo;
-		this.añoFab = añoFab;
-		this.numSerie = marca + modelo + añoFab;
+		this.fechaFab = fechaFab;
+		this.numSerie = marca + modelo + fechaFab;
 	}
 	
 	@Override
 	public String toString () {
-		return "Matrícula: " + matricula + "\nNº de bastidor: " + numBastidor + "\nColor: " + color + "\nNº de asientos: "
-		+ numAsientos + "\nPrecio: " + precio + "\nNº de serie: " + numSerie;
+		return "Matrï¿½cula: " + matricula + "\nNï¿½ de bastidor: " + numBastidor + "\nColor: " + color + "\nNï¿½ de asientos: "
+		+ numAsientos + "\nPrecio: " + precio + "\nNï¿½ de serie: " + numSerie;
 	}
 	
 	// GETTERS Y SETTERS
@@ -89,12 +89,12 @@ public abstract class Vehiculo {
 		this.modelo = modelo;
 	}
 
-	public String getAñoFab() {
-		return añoFab;
+	public String getFechaFab() {
+		return fechaFab;
 	}
 
-	public void setAñoFab(String añoFab) {
-		this.añoFab = añoFab;
+	public void setFechaFab(String fechaFab) {
+		this.fechaFab = fechaFab;
 	}
 	
 	

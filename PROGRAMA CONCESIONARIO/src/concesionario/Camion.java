@@ -5,9 +5,9 @@ public class Camion extends Vehiculo {
 private float carga;
 private char tipoMercancia;
 	
-	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String añoFab,
+	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String fechaFab,
 					float carga, char tipoMercancia) {
-		super(matricula, numBastidor, color, numAsientos, precio, marca, modelo, añoFab);
+		super(matricula, numBastidor, color, numAsientos, precio, marca, modelo, fechaFab);
 		this.carga = carga;
 		this.tipoMercancia = tipoMercancia;
 	}
@@ -15,7 +15,7 @@ private char tipoMercancia;
 	@Override
 	public String toString () {
 		System.out.println(super.toString());
-		return "Carga: " + carga + "\nTipo de mercancía: " + tipoMercancia + "\n";
+		return "Carga: " + carga + "\nTipo de mercancia: " + tipoMercancia + "\n";
 	}
 	
 	// GETTERS Y SETTERS

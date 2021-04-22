@@ -19,9 +19,9 @@ public class Modelo {
 
 		try {
 			conexion = DriverManager.getConnection(url, user, password);
-			System.out.println("Conexión a base de datos realizada con éxito!");
+			System.out.println("Conexion a base de datos realizada con exito!");
 		} catch (SQLException e) {
-			System.out.println("Ha saltado una excepción de tipo SQLException " + e.getMessage());
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
 	}
 

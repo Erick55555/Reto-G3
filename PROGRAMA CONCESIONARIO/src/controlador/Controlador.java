@@ -36,7 +36,7 @@ public class Controlador {
 				} else {
 					Camion camion = menu.pedirDatosCamion();
 					gestion.insertarCamion(camion);
-					System.out.println("Camión creado satisfactoriamente!, esta es su info:");
+					System.out.println("Camion creado satisfactoriamente!, esta es su info:");
 					menu.mostrarInfoVehiculo(camion);
 				}
 				break;
@@ -57,19 +57,19 @@ public class Controlador {
 						String campo = menu.pedirCampoCoche();
 						String nuevoValor = menu.pedirNuevoValor(campo);
 						gestion.modificarCampo(campo, nuevoValor, matricula);
-						System.out.println("El campo " + campo + " del" + tipo + " con matrícula '" + matricula
+						System.out.println("El campo " + campo + " del" + tipo + " con matricula '" + matricula
 								+ "' ha sido actualizado correctamente");
 					} else {
 						String campo = menu.pedirCampoCamion();
 						String nuevoValor = menu.pedirNuevoValor(campo);
 						gestion.modificarCampo(campo, nuevoValor, matricula);
-						System.out.println("El campo " + campo + " del" + tipo + " con matrícula '" + matricula
+						System.out.println("El campo " + campo + " del" + tipo + " con matricula '" + matricula
 								+ "' ha sido actualizado correctamente");
 					}
 
 				} else {
 					System.out
-							.println("El " + tipo + " con matrícula '" + matricula + "' no existe en la base de datos");
+							.println("El " + tipo + " con matricula '" + matricula + "' no existe en la base de datos");
 				}
 				break;
 
@@ -121,7 +121,7 @@ public class Controlador {
 
 		} while (opcion != 8);
 
-		System.out.println("Adiós!");
+		System.out.println("Adios!");
 
 	}
 
