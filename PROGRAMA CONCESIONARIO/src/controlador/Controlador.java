@@ -31,12 +31,12 @@ public class Controlador {
 				if (tipo.equals("COCHE")) {
 					Coche coche = menu.pedirDatosCoche();
 					gestion.insertarCoche(coche);
-					System.out.println("Coche creado satisfactoriamente!, esta es su info:");
+					menu.escribirInfo("Coche creado satisfactoriamente!, esta es su info:");
 					menu.mostrarInfoVehiculo(coche);
 				} else {
 					Camion camion = menu.pedirDatosCamion();
 					gestion.insertarCamion(camion);
-					System.out.println("Camion creado satisfactoriamente!, esta es su info:");
+					menu.escribirInfo("Camion creado satisfactoriamente!, esta es su info:");
 					menu.mostrarInfoVehiculo(camion);
 				}
 				break;
@@ -57,19 +57,19 @@ public class Controlador {
 						String campo = menu.pedirCampoCoche();
 						String nuevoValor = menu.pedirNuevoValor(campo);
 						gestion.modificarCampo(campo, nuevoValor, matricula);
-						System.out.println("El campo " + campo + " del" + tipo + " con matricula '" + matricula
+						menu.escribirInfo("El campo " + campo + " del" + tipo + " con matricula '" + matricula
 								+ "' ha sido actualizado correctamente");
 					} else {
 						String campo = menu.pedirCampoCamion();
 						String nuevoValor = menu.pedirNuevoValor(campo);
 						gestion.modificarCampo(campo, nuevoValor, matricula);
-						System.out.println("El campo " + campo + " del" + tipo + " con matricula '" + matricula
+						menu.escribirInfo("El campo " + campo + " del" + tipo + " con matricula '" + matricula
 								+ "' ha sido actualizado correctamente");
 					}
 
 				} else {
-					System.out
-							.println("El " + tipo + " con matricula '" + matricula + "' no existe en la base de datos");
+					menu.escribirInfo(
+							"El " + tipo + " con matricula '" + matricula + "' no existe en la base de datos");
 				}
 				break;
 
@@ -81,11 +81,14 @@ public class Controlador {
 					String matriculaCoche = menu.pedirMatricula(tipo);
 					boolean comprobar = gestion.comprobarMatriculas(matriculaCoche);
 					if (comprobar == true) {
-				   		String respuesta = menu.cambiarColor(tipo);
-				   		String color = menu.pedirColor();
+						String respuesta = menu.cambiarColor(tipo);
+						String color = "";
+						if (respuesta.equals("SI")) {
+							color = menu.pedirColor();
+						}
 						gestion.eliminarDatos(matriculaCoche, respuesta, color);
 					} else {
-						System.out.println("La matricula que has metido no existe");
+						menu.escribirInfo("La matricula que has metido no existe");
 					}
 
 				} else if (tipo.equals("CAMION")) {
@@ -94,10 +97,13 @@ public class Controlador {
 					boolean comprobar = gestion.comprobarMatriculas(matriculaCamion);
 					if (comprobar == true) {
 						String respuesta = menu.cambiarColor(tipo);
-				   		String color = menu.pedirColor();
+						String color = "";
+						if (respuesta.equals("SI")) {
+							color = menu.pedirColor();
+						}
 						gestion.eliminarDatos(matriculaCamion, respuesta, color);
 					} else {
-						System.out.println("La matricula que has metido no existe");
+						menu.escribirInfo("La matricula que has metido no existe");
 					}
 				}
 				break;
@@ -108,7 +114,7 @@ public class Controlador {
 
 			case 5:
 				String[] fechas = menu.solicitarFechas();
-				System.out.println("Estos son los vehiculos disponibles en el rango de fechas: (" + fechas[0] + " - "
+				menu.escribirInfo("Estos son los vehiculos disponibles en el rango de fechas: (" + fechas[0] + " - "
 						+ fechas[1] + ")");
 				gestion.ConsultaStockFechas(fechas);
 				break;
@@ -121,7 +127,14 @@ public class Controlador {
 
 		} while (opcion != 8);
 
-		System.out.println("Adios!");
+		if (gestion.cerrarBd()) {
+			menu.escribirInfo("Conexion cerrada");
+		} else {
+			menu.escribirInfo("Error al cerrar la conexion");
+
+		}
+		
+		menu.escribirInfo("Adios!");
 
 	}
 

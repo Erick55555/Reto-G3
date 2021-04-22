@@ -10,7 +10,6 @@ public class Modelo {
 
 	private static GestionBD gestionBd = new GestionBD();
 
-
 	private String user = "Erick", password = "P@ssw0rd", url = "jdbc:mysql://220-08-HZ307518:3306/reto_g3";
 	private static Connection conexion;
 
@@ -19,7 +18,6 @@ public class Modelo {
 
 		try {
 			conexion = DriverManager.getConnection(url, user, password);
-			System.out.println("Conexion a base de datos realizada con exito!");
 		} catch (SQLException e) {
 			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 		}
@@ -70,9 +68,14 @@ public class Modelo {
 	public static ResultSet consultarStockCamiones() {
 		return gestionBd.obtenerCamiones(conexion);
 	}
-	
-	public void exportar (String ruta) {
-		ExportarXML.main(null, ruta);;
+
+	public void exportar(String ruta) {
+		ExportarXML.main(null, ruta);
+		;
+	}
+
+	public boolean cerrarBd() {
+		return gestionBd.desconectar(conexion);
 	}
 
 }

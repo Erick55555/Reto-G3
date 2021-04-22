@@ -20,8 +20,8 @@ public abstract class Vehiculo {
 	
 	@Override
 	public String toString () {
-		return "Matr�cula: " + matricula + "\nN� de bastidor: " + numBastidor + "\nColor: " + color + "\nN� de asientos: "
-		+ numAsientos + "\nPrecio: " + precio + "\nN� de serie: " + numSerie;
+		return "Matricula: " + matricula + "\nNº de bastidor: " + numBastidor + "\nColor: " + color + "\nNº de asientos: "
+		+ numAsientos + "\nPrecio: " + precio + "\nNº de serie: " + numSerie;
 	}
 	
 	// GETTERS Y SETTERS
@@ -96,7 +96,5 @@ public abstract class Vehiculo {
 	public void setFechaFab(String fechaFab) {
 		this.fechaFab = fechaFab;
 	}
-	
-	
 	
 }

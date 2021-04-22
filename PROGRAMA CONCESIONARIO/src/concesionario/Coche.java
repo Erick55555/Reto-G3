@@ -13,7 +13,7 @@ public class Coche extends Vehiculo {
 	@Override
 	public String toString () {
 		System.out.println(super.toString());
-		return "N� de puertas: " + numPuertas + "\nCapacidad del maletero: " + capacidadMaletero + "\n";
+		return "Nº de puertas: " + numPuertas + "\nCapacidad del maletero: " + capacidadMaletero + "\n";
 	}
 	
 	// GETTERS Y SETTERS

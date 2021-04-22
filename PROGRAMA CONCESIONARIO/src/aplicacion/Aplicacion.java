@@ -17,7 +17,6 @@ public class Aplicacion {
 			System.out.println("Ha saltado una excepcion de tipo ClassNotFoundException " + e.getMessage());
 		}
 	
-		
 	}
 	
 }
