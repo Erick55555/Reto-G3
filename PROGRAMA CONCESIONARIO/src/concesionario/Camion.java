@@ -5,7 +5,8 @@ public class Camion extends Vehiculo {
 private float carga;
 private char tipoMercancia;
 	
-	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String fechaFab,
+	public Camion (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca,
+					String modelo, String fechaFab,
 					float carga, char tipoMercancia) {
 		super(matricula, numBastidor, color, numAsientos, precio, marca, modelo, fechaFab);
 		this.carga = carga;
