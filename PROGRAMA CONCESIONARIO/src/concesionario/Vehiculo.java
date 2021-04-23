@@ -1,12 +1,13 @@
 package concesionario;
 
 public abstract class Vehiculo {
-	
+
 	private String matricula, color, numBastidor, marca, modelo, fechaFab, numSerie;
 	private int numAsientos;
 	private float precio;
-	
-	public Vehiculo (String matricula, String numBastidor, String color, int numAsientos, float precio, String marca, String modelo, String fechaFab) {
+
+	public Vehiculo(String matricula, String numBastidor, String color, int numAsientos, float precio, String marca,
+			String modelo, String fechaFab) {
 		this.matricula = matricula;
 		this.numBastidor = numBastidor;
 		this.color = color;
@@ -17,13 +18,13 @@ public abstract class Vehiculo {
 		this.fechaFab = fechaFab;
 		this.numSerie = marca + modelo + fechaFab;
 	}
-	
+
 	@Override
-	public String toString () {
-		return "Matricula: " + matricula + "\nNº de bastidor: " + numBastidor + "\nColor: " + color + "\nNº de asientos: "
-		+ numAsientos + "\nPrecio: " + precio + "\nNº de serie: " + numSerie;
+	public String toString() {
+		return "Matricula: " + matricula + "\nNº de bastidor: " + numBastidor + "\nColor: " + color
+				+ "\nNº de asientos: " + numAsientos + "\nPrecio: " + precio + "\nNº de serie: " + numSerie;
 	}
-	
+
 	// GETTERS Y SETTERS
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
@@ -96,5 +97,5 @@ public abstract class Vehiculo {
 	public void setFechaFab(String fechaFab) {
 		this.fechaFab = fechaFab;
 	}
-	
+
 }

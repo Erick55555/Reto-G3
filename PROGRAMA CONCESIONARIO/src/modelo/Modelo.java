@@ -71,11 +71,27 @@ public class Modelo {
 
 	public void exportar(String ruta) {
 		ExportarXML.main(null, ruta);
-		;
 	}
 
 	public boolean cerrarBd() {
 		return gestionBd.desconectar(conexion);
+	}
+
+	public void importarXML(String ruta) {
+		ImportarXML.leerCoches(ruta);
+		ImportarXML.leerCamiones(ruta);
+	}
+
+	public static void insertarVehiculoXML(ArrayList<String> valores) {
+		gestionBd.insertarVehiculoXML(conexion, valores);
+	}
+
+	public static void insertarCocheXML(ArrayList<String> valores) {
+		gestionBd.insertarCocheXML(conexion, valores);
+	}
+
+	public static void insertarCamionXML(ArrayList<String> valores) {
+		gestionBd.insertarCamionXML(conexion, valores);
 	}
 
 }

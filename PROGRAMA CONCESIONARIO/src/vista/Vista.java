@@ -78,7 +78,7 @@ public class Vista {
 		String marca = Console.readString();
 		System.out.println("Introduce el modelo");
 		String modelo = Console.readString();
-		System.out.println("Introduce la fecha de fabricacion [ANIO/MES/DIA]");
+		System.out.println("Introduce la fecha de fabricacion [ANIO-MES-DIA]");
 		String fechaFab = Console.readString();
 		System.out.println("Introduce el numero de puertas");
 		int numPuertas = Console.readInt();
@@ -104,7 +104,7 @@ public class Vista {
 		String marca = Console.readString();
 		System.out.println("Introduce el modelo");
 		String modelo = Console.readString();
-		System.out.println("Introduce la fecha de fabricacion [ANIO/MES/DIA]");
+		System.out.println("Introduce la fecha de fabricacion [ANIO-MES-DIA]");
 		String fechaFab = Console.readString();
 		System.out.println("Introduce el peso de la carga");
 		float carga = Console.readFloat();
@@ -175,9 +175,16 @@ public class Vista {
 		String color = Console.readString();
 		return color;
 	}
-	
-	public void escribirInfo (String info) {
+
+	public void escribirInfo(String info) {
 		System.out.println(info);
+	}
+
+	public String pedirRutaImportar() {
+		System.out.println(
+				"Introduce la ruta del archivo XML que quieres importar [c:/users/tu_usuario/.../archivo.xml]");
+		String ruta = Console.readString();
+		return ruta;
 	}
 
 }

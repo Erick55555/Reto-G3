@@ -18,10 +18,27 @@ public class GestionBD {
 
 	public void insertarVehiculoBd(Connection conexion, Vehiculo vehiculo) {
 		try (Statement st = conexion.createStatement()) {
-			st.executeUpdate("insert into categorias values ('" + vehiculo.getMarca() + "', '" + vehiculo.getModelo()
-					+ "', '" + vehiculo.getFechaFab() + "')");
-			st.executeUpdate("insert into num_series values ('" + vehiculo.getNumSerie() + "', '" + vehiculo.getMarca()
-					+ "', '" + vehiculo.getModelo() + "', '" + vehiculo.getFechaFab() + "')");
+
+			ResultSet rs = st.executeQuery("select * from categorias");
+			String claveCategoria = vehiculo.getNumSerie();
+			boolean existe = false;
+
+			while (rs.next()) {
+				String clave = rs.getString(1) + rs.getString(2) + rs.getString(3);
+				if (clave.equals(claveCategoria)) {
+					existe = true;
+				}
+			}
+
+			if (!existe) {
+				st.executeUpdate("delete from categorias where marca = '" + vehiculo.getMarca() + "' and modelo = '" + vehiculo.getModelo() + "' and Añofab = '" + vehiculo.getFechaFab() + "'");
+				
+				st.executeUpdate("insert into categorias values ('" + vehiculo.getMarca() + "', '"
+						+ vehiculo.getModelo() + "', '" + vehiculo.getFechaFab() + "')");
+				st.executeUpdate("insert into num_series values ('" + vehiculo.getNumSerie() + "', '"
+						+ vehiculo.getMarca() + "', '" + vehiculo.getModelo() + "', '" + vehiculo.getFechaFab() + "')");
+			}
+
 			st.executeUpdate("insert into vehiculos values ('" + vehiculo.getMatricula() + "', '"
 					+ vehiculo.getNumBastidor() + "', '" + vehiculo.getColor() + "', " + vehiculo.getNumAsientos()
 					+ ", " + vehiculo.getPrecio() + ", '" + vehiculo.getNumSerie() + "')");
@@ -116,7 +133,7 @@ public class GestionBD {
 		for (int i = 0; i < camposCoche.length; i++) {
 			if (camposCoche[i].equals(campo)) {
 				try (Statement st = conexion.createStatement()) {
-					ResultSet rs = st.executeQuery("update coches set " + campo + " = '" + nuevoValor
+					st.executeUpdate("update coches set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
 					System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
@@ -128,7 +145,7 @@ public class GestionBD {
 		for (int i = 0; i < camposCamion.length; i++) {
 			if (camposCamion[i].equals(campo)) {
 				try (Statement st = conexion.createStatement()) {
-					ResultSet rs = st.executeQuery("update camiones set " + campo + " = '" + nuevoValor
+					st.executeUpdate("update camiones set " + campo + " = '" + nuevoValor
 							+ "' where matricula = '" + matricula + "'");
 				} catch (SQLException e) {
 					System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
@@ -248,7 +265,7 @@ public class GestionBD {
 					"select v.*,c.num_puertas,c.capacidad_maletero from Vehiculos v,Coches c where v.matricula=c.matricula");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 			e.printStackTrace();
 		}
 		return rs;
@@ -262,7 +279,7 @@ public class GestionBD {
 					"select v.*,c.carga,c.tipo_mercancia from Vehiculos v,Camiones c where v.matricula=c.matricula");
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage());
 			e.printStackTrace();
 		}
 		return rs;
@@ -276,6 +293,60 @@ public class GestionBD {
 			return false;
 		}
 
+	}
+
+	public void insertarVehiculoXML(Connection conexion, ArrayList<String> valores) {
+		try {
+			Statement st = conexion.createStatement();
+
+			ResultSet rs = st.executeQuery("select * from categorias");
+			String claveCategoria = valores.get(0) + valores.get(1) + valores.get(2);
+			boolean existe = false;
+
+			while (rs.next()) {
+				String clave = rs.getString(1) + rs.getString(2) + rs.getString(3);
+				if (clave.equals(claveCategoria)) {
+					existe = true;
+				}
+			}
+
+			if (!existe) {
+				st.executeUpdate("insert into categorias values ('" + valores.get(0) + "', '" + valores.get(1) + "', '"
+						+ valores.get(2) + "')");
+				st.executeUpdate("insert into num_series values ('" + valores.get(0) + valores.get(1) + valores.get(2)
+						+ "', '" + valores.get(0) + "', '" + valores.get(1) + "', '" + valores.get(2) + "')");
+			}
+
+			st.executeUpdate("insert into vehiculos values ('" + valores.get(3) + "', '" + valores.get(4) + "', '"
+					+ valores.get(5) + "', " + Integer.parseInt(valores.get(6)) + ", "
+					+ Float.parseFloat(valores.get(7)) + ", '" + valores.get(0) + valores.get(1) + valores.get(2)
+					+ "')");
+		} catch (SQLException e) {
+			System.out.println(
+					"Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en vehiculos");
+		}
+	}
+
+	public void insertarCocheXML(Connection conexion, ArrayList<String> valores) {
+		try {
+			Statement st = conexion.createStatement();
+			st.executeUpdate("insert into coches values ('" + valores.get(3) + "', " + Integer.parseInt(valores.get(9))
+					+ ", " + Integer.parseInt(valores.get(10)) + ")");
+		} catch (SQLException e) {
+			System.out
+					.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en coches");
+		}
+	}
+
+	public void insertarCamionXML(Connection conexion, ArrayList<String> valores) {
+		try {
+			Statement st = conexion.createStatement();
+			st.executeUpdate("insert into camiones values ('" + valores.get(3) + "', " + Integer.parseInt(valores.get(9))
+					+ ", '" + valores.get(10) + "')");
+		} catch (SQLException e) {
+			System.out
+					.println("Ha saltado una excepcion de tipo SQLException " + e.getMessage() + " insertar en camiones");
+		}
 	}
 
 }

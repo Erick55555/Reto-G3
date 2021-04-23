@@ -3,7 +3,6 @@ package controlador;
 import concesionario.Camion;
 import concesionario.Coche;
 import modelo.Modelo;
-import vista.Console;
 import vista.Vista;
 
 public class Controlador {
@@ -120,8 +119,13 @@ public class Controlador {
 				break;
 
 			case 6:
-				String ruta = menu.pedirRuta();
-				gestion.exportar(ruta);
+				String rutaExportar = menu.pedirRuta();
+				gestion.exportar(rutaExportar);
+				break;
+
+			case 7:
+				String rutaImportar = menu.pedirRutaImportar();
+				gestion.importarXML(rutaImportar);
 				break;
 			}
 
@@ -133,7 +137,7 @@ public class Controlador {
 			menu.escribirInfo("Error al cerrar la conexion");
 
 		}
-		
+
 		menu.escribirInfo("Adios!");
 
 	}
