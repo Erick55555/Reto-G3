@@ -311,6 +311,7 @@ public class GestionBD {
 			}
 
 			if (!existe) {
+				st.executeUpdate("delete from categorias where marca = '" + valores.get(0) + "' and modelo = '" + valores.get(1) + "' and Añofab = '" + valores.get(2) + "'");
 				st.executeUpdate("insert into categorias values ('" + valores.get(0) + "', '" + valores.get(1) + "', '"
 						+ valores.get(2) + "')");
 				st.executeUpdate("insert into num_series values ('" + valores.get(0) + valores.get(1) + valores.get(2)
